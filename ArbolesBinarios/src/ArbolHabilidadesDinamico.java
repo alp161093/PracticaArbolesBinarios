@@ -55,18 +55,18 @@ public class ArbolHabilidadesDinamico {
         	//la habilidad se puede desbloquear
         	Habilidad habilidadIzq = generacionHabilidadIzq(habilidad);
         	Habilidad habilidadDer = generacionHabilidadDer(habilidad);
-        	//Una vez creadas las nuevas habilidades buscamos si estan en el arbol ya metidas, para no pisar las que tenemos
-        	Habilidad comprobacionHabilidadIzq = buscarHabilidadIRD(habilidadIzq.getNombre());
-        	Habilidad comprobacionHabilidadDer = buscarHabilidadIRD(habilidadDer.getNombre());
-        	if(comprobacionHabilidadDer == null && comprobacionHabilidadIzq == null) {
-        		//al ser null ambos significa que no se encuentran en el arbol por lo tanto procedemos a intentar meterlos
-        		if(habilidadIzq != null && habilidadDer != null) {
-    	        	agregarHabilidad(habilidad.getNombre(), habilidadIzq, habilidadDer);
-    	        	System.out.println("Se ha desbloqueado la habilidad " + habilidad.toString() + " y tienes las nuevas habilidades de :");
-            		System.out.println(habilidadIzq.toString());
-                	System.out.println(habilidadDer.toString());
-                	System.out.println();
-            	}
+        	if(habilidadIzq != null && habilidadDer != null) {
+	        	//Una vez creadas las nuevas habilidades buscamos si estan en el arbol ya metidas, para no pisar las que tenemos
+	        	Habilidad comprobacionHabilidadIzq = buscarHabilidadIRD(habilidadIzq.getNombre());
+	        	Habilidad comprobacionHabilidadDer = buscarHabilidadIRD(habilidadDer.getNombre());
+	        	if(comprobacionHabilidadDer == null && comprobacionHabilidadIzq == null) {
+	        		//al ser null ambos significa que no se encuentran en el arbol por lo tanto procedemos a intentar meterlo 		 
+	    	        	agregarHabilidad(habilidad.getNombre(), habilidadIzq, habilidadDer);
+	    	        	System.out.println("Se ha desbloqueado la habilidad " + habilidad.toString() + " y tienes las nuevas habilidades de :");
+	            		System.out.println(habilidadIzq.toString());
+	                	System.out.println(habilidadDer.toString());
+	                	System.out.println();
+	            }
         	} 
         	
         }

@@ -180,8 +180,8 @@ public class Main {
     public static ArbolHabilidadesDinamico fillArbolDinamico() {
     	// Crear las habilidades
         Habilidad personaje = new Habilidad("Elfo", "Personaje");
-        Habilidad ataque = new Habilidad("Ataque", "Ataque");
-        Habilidad defensa = new Habilidad("Defensa", "Defensa");
+        Habilidad ataque = new Habilidad("Ataque", "Personaj");
+        Habilidad defensa = new Habilidad("Defensa", "Personaje");
         Habilidad fuegoAtaque = new Habilidad("fuegoAtaque", "Ataque");
         Habilidad hieloAtaque = new Habilidad("hieloAtaque", "Ataque");
         Habilidad fuegoDefensa = new Habilidad("fuegoDefensa", "Defensa");
