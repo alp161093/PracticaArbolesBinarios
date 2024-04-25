@@ -11,12 +11,13 @@ public class Main {
     	
         int max_turnos = 10;
         int turnos = 0;
-
+        int victoriasTroll = 0;
+        int victoriasElfo = 0;
         while(turnos <= max_turnos){
         	
             if(turnos%2==0){
                 // Ataca un jugador (Por ejemplo troll)
-            	System.out.println("Turno " + (turnos +1) + ", le toca al jugador: Troll");
+            	System.out.println("Turno " + (turnos +1) + "/" + max_turnos +" , le toca al jugador: Troll");
             	System.out.println("Tu arbol: ");
             	arbolTroll.imprimirArbol();
             	System.out.println();
@@ -70,24 +71,27 @@ public class Main {
             	
             	//resolucion de la lucha
             	if(habilidadAtaque.getNivel() > habilidadDefensa.getNivel()) {
-            		System.out.println("ha ganado el Troll, se sube un nivel su habilidad");
+            		System.out.println("Ha ganado el Troll, se sube un nivel su habilidad");
             		arbolTroll.subirNivelHabilidad(habilidadAtaque);
             		System.out.println(habilidadAtaque.toString());
             		arbolTroll.habilidadDisponible(habilidadAtaque);
+            		victoriasTroll++; //se incrementa el contador de victorias del troll
             	}
             	else if(habilidadAtaque.getNivel() < habilidadDefensa.getNivel()){
-            		System.out.println("ha ganado el Elfo, se sube un nivel su habilidad");
+            		System.out.println("Ha ganado el Elfo, se sube un nivel su habilidad");
             		arbolElfo.subirNivelHabilidad(habilidadDefensa.getNombre());
             		System.out.println(habilidadDefensa.toString());
             		arbolElfo.habilidadDisponible(habilidadDefensa);
+            		victoriasElfo++; //se incrementa el contador de victorias del elfo
             	}
             	else {
             		System.out.println("Ha quedado empate, ninguna sube nivel");
+            		System.out.println();
             	}
             	turnos++;
             }else{
                 //Ataca el otro jugador (Por ejemplo Elfo)
-            	System.out.println("Turno " + (turnos +1) + ", le toca al jugador: Elfo");
+            	System.out.println("Turno " + (turnos +1) + "/" + max_turnos + " , le toca al jugador: Elfo");
             	System.out.println("Tu arbol: ");
             	arbolElfo.imprimirArbol();
             	System.out.println();
@@ -139,19 +143,22 @@ public class Main {
             	
             	//resolucion de la lucha
             	if(habilidadAtaque.getNivel() > habilidadDefensa.getNivel()) {
-            		System.out.println("ha ganado el Elfo, se sube un nivel su habilidad");
+            		System.out.println("Ha ganado el Elfo, se sube un nivel su habilidad");
             		arbolElfo.subirNivelHabilidad(habilidadAtaque.getNombre());
             		System.out.println(habilidadAtaque.toString());
             		arbolElfo.habilidadDisponible(habilidadAtaque);
+            		victoriasElfo++; //se incrementa el contador de victorias del elfo
             	}
             	else if(habilidadAtaque.getNivel() < habilidadDefensa.getNivel()){
-            		System.out.println("ha ganado el Troll, se sube un nivel su habilidad");
+            		System.out.println("Ha ganado el Troll, se sube un nivel su habilidad");
             		arbolTroll.subirNivelHabilidad(habilidadDefensa);
             		System.out.println(habilidadDefensa.toString());
             		arbolTroll.habilidadDisponible(habilidadAtaque);
+            		victoriasTroll++; //se incrementa el contador de victorias del troll
             	}
             	else {
             		System.out.println("Ha quedado empate, ninguna sube nivel");
+            		System.out.println();
             	}
             	turnos++;
             }
@@ -159,6 +166,13 @@ public class Main {
         }
 
         //Al finalizar la partida imprimir los arboles de cada jugador
+        System.out.println("Resumen final de la partida -> Troll: " + victoriasTroll + " vs Elfo: "+ victoriasElfo);
+        if(victoriasTroll > victoriasElfo)
+        	System.out.println("Ha ganado el Troll!!");
+        else if(victoriasElfo > victoriasTroll)
+        	System.out.println("Ha ganado el Troll!!");
+        else
+        	System.out.println("Ha quedado empate la partida");
     }
     
     

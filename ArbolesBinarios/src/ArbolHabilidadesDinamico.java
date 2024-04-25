@@ -55,13 +55,20 @@ public class ArbolHabilidadesDinamico {
         	//la habilidad se puede desbloquear
         	Habilidad habilidadIzq = generacionHabilidadIzq(habilidad);
         	Habilidad habilidadDer = generacionHabilidadDer(habilidad);
-        	if(habilidadIzq != null && habilidadDer != null) {
-	        	agregarHabilidad(habilidad.getNombre(), habilidadIzq, habilidadDer);
-	        	System.out.println("Se ha desbloqueado la habilidad " + habilidad.toString() + " y tienes las nuevas habilidades de :");
-        		System.out.println(habilidadIzq.toString());
-            	System.out.println(habilidadDer.toString());
-            	System.out.println();
-        	}
+        	//Una vez creadas las nuevas habilidades buscamos si estan en el arbol ya metidas, para no pisar las que tenemos
+        	Habilidad comprobacionHabilidadIzq = buscarHabilidadIRD(habilidadIzq.getNombre());
+        	Habilidad comprobacionHabilidadDer = buscarHabilidadIRD(habilidadDer.getNombre());
+        	if(comprobacionHabilidadDer == null && comprobacionHabilidadIzq == null) {
+        		//al ser null ambos significa que no se encuentran en el arbol por lo tanto procedemos a intentar meterlos
+        		if(habilidadIzq != null && habilidadDer != null) {
+    	        	agregarHabilidad(habilidad.getNombre(), habilidadIzq, habilidadDer);
+    	        	System.out.println("Se ha desbloqueado la habilidad " + habilidad.toString() + " y tienes las nuevas habilidades de :");
+            		System.out.println(habilidadIzq.toString());
+                	System.out.println(habilidadDer.toString());
+                	System.out.println();
+            	}
+        	} 
+        	
         }
         else {
         	System.out.println("Todavía no puedes mejorar esta habilidad, sigue ganando con ella!");
@@ -132,7 +139,8 @@ public class ArbolHabilidadesDinamico {
     
     // Método para buscar una habilidad por nombre.
     public Habilidad buscarHabilidadIRD(String nombre) {
-        return IRD(this.raiz, nombre);
+        System.out.println("Estas en el modo de busqueda IRD");
+    	return IRD(this.raiz, nombre);
     }
     
     private Habilidad IRD(Nodo nodo, String nombre) {
@@ -172,7 +180,8 @@ public class ArbolHabilidadesDinamico {
     }
     
     public Habilidad buscarHabilidadRID(String nombre) {
-       return RID(raiz, nombre);
+    	System.out.println("Estas en el modo de busqueda RID");
+    	return RID(raiz, nombre);
     }
     
     private Habilidad RID(Nodo nodo, String nombre) {
@@ -199,7 +208,8 @@ public class ArbolHabilidadesDinamico {
     }
     
     public Habilidad buscarHabilidadIDR(String nombre) {
-        return IDR(raiz, nombre); 
+    	System.out.println("Estas en el modo de busqueda IDR");
+    	return IDR(raiz, nombre); 
     }
     
     private Habilidad IDR(Nodo nodo, String nombre) {
@@ -227,6 +237,7 @@ public class ArbolHabilidadesDinamico {
     }
     
     public Habilidad buscarHabilidadAnchura(String nombre) {
+    	System.out.println("Estas en el modo de busqueda Anchura");
     	Queue<Nodo> cola = new LinkedList<>();
         cola.add(raiz);
 
@@ -236,15 +247,13 @@ public class ArbolHabilidadesDinamico {
                 System.out.println("Se va a comprobar esta habilidad -> " + nodo.habilidad.getNombre() + " , ENCONTRADO");
             	return nodo.habilidad;
             }
-            else {
+            else 
             	System.out.println("Se va a comprobar esta habilidad -> " + nodo.habilidad.getNombre() + " , NO ES");
-            }
-            if (nodo.nodoIzq != null) {
+            
+            if (nodo.nodoIzq != null) 
                 cola.add(nodo.nodoIzq);
-            }
-            if (nodo.nodoDer != null) {
+            if (nodo.nodoDer != null) 
                 cola.add(nodo.nodoDer);
-            }
         } 
         return null;
     }
@@ -264,14 +273,11 @@ public class ArbolHabilidadesDinamico {
     	        System.out.println(nodo.habilidad.toString());
     	        
     	        // Imprimir los nodos hijos izquierdo y derecho si no son nulos
-    	        if (nodo.nodoIzq != null && nodo.nodoIzq.habilidad != null) {
+    	        if (nodo.nodoIzq != null && nodo.nodoIzq.habilidad != null)
     	            imprimirNodo(nodo.nodoIzq, nivel + 1);
     	        
-    	        }
-    	        
-    	        if (nodo.nodoDer != null && nodo.nodoDer.habilidad != null) {
+    	        if (nodo.nodoDer != null && nodo.nodoDer.habilidad != null)
     	            imprimirNodo(nodo.nodoDer, nivel + 1);
-    	        } 
     	    }
     }
    
