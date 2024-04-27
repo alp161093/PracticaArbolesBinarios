@@ -4,6 +4,11 @@ public class Main {
     public static void main(String[] args) {
     	Scanner scanner = new Scanner(System.in);
     	System.out.println("Bienvenido al juego");
+    	System.out.println("INSTRUCCIONES: el juego consiste en una lucha entre el Troll y el elfo,\nel troll empieza luchando, "
+    			+ "para ello se tiene que elegir una habilidad \nde ataque y la habilidad de defensa del rival que quieras atacar.");
+    	System.out.println("En el arbol de cada jugador se muestran las habilidades que tienen \ndesbloqueadas, cuando se suba hasta "
+    			+ "la mitad o más de la mitad de su \nmaximo nivel se desbloquearan sus hijas. Este desbloqueo se indica por \npantalla"
+    			+ " al usuario\n\n");
     	System.out.println("Cargando datos......");
     	ArbolHabilidadesSecuencial arbolTroll = fillArbolSecuencial();
     	ArbolHabilidadesDinamico arbolElfo = fillArbolDinamico();
@@ -13,7 +18,7 @@ public class Main {
         int turnos = 0;
         int victoriasTroll = 0;
         int victoriasElfo = 0;
-        while(turnos <= max_turnos){
+        while(turnos < max_turnos){
         	
             if(turnos%2==0){
                 // Ataca un jugador (Por ejemplo troll)
@@ -54,7 +59,7 @@ public class Main {
             	String nombreHabilidadDefensa = scanner.nextLine();
             	habilidadOK = false;
             	while(!habilidadOK) {
-                	habilidadDefensa = arbolElfo.buscarHabilidadIDR(nombreHabilidadDefensa);
+                	habilidadDefensa = arbolElfo.buscarHabilidadIRD(nombreHabilidadDefensa);
                 	if(habilidadDefensa != null && habilidadDefensa.getTipo().equals("Defensa")) {
                 		habilidadOK = true;
                 	}
@@ -106,7 +111,7 @@ public class Main {
             	Habilidad habilidadDefensa = null;
                 
             	while(!habilidadOK) {
-                	habilidadAtaque = arbolElfo.buscarHabilidadAnchura(nombreHabilidadAtaque);
+                	habilidadAtaque = arbolElfo.buscarHabilidadRID(nombreHabilidadAtaque);
                 	if(habilidadAtaque != null && habilidadAtaque.getTipo().equals("Ataque")) {
             			habilidadOK = true;
                 	}
@@ -153,7 +158,7 @@ public class Main {
             		System.out.println("Ha ganado el Troll, se sube un nivel su habilidad");
             		arbolTroll.subirNivelHabilidad(habilidadDefensa);
             		System.out.println(habilidadDefensa.toString());
-            		arbolTroll.habilidadDisponible(habilidadAtaque);
+            		arbolTroll.habilidadDisponible(habilidadDefensa);
             		victoriasTroll++; //se incrementa el contador de victorias del troll
             	}
             	else {
@@ -170,9 +175,15 @@ public class Main {
         if(victoriasTroll > victoriasElfo)
         	System.out.println("Ha ganado el Troll!!");
         else if(victoriasElfo > victoriasTroll)
-        	System.out.println("Ha ganado el Troll!!");
+        	System.out.println("Ha ganado el Elfo!!");
         else
         	System.out.println("Ha quedado empate la partida");
+        
+        System.out.println("\nArbol del Troll:");
+        arbolTroll.imprimirArbol();
+        System.out.println("\nArbol del Elfo:");
+        arbolElfo.imprimirArbol();
+        System.out.println("FIN DE LA PARTIDA!");
     }
     
     
@@ -180,7 +191,7 @@ public class Main {
     public static ArbolHabilidadesDinamico fillArbolDinamico() {
     	// Crear las habilidades
         Habilidad personaje = new Habilidad("Elfo", "Personaje");
-        Habilidad ataque = new Habilidad("Ataque", "Personaj");
+        Habilidad ataque = new Habilidad("Ataque", "Personaje");
         Habilidad defensa = new Habilidad("Defensa", "Personaje");
         Habilidad fuegoAtaque = new Habilidad("fuegoAtaque", "Ataque");
         Habilidad hieloAtaque = new Habilidad("hieloAtaque", "Ataque");

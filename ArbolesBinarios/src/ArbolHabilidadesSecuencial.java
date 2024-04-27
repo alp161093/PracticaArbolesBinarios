@@ -79,17 +79,18 @@ public class ArbolHabilidadesSecuencial {
         	Habilidad habilidadIzq = generacionHabilidadIzq(habilidad);
         	Habilidad habilidadDer = generacionHabilidadDer(habilidad);
         	//Una vwez creadas las nuevas habilidades buscamos si estan en el arbol ya metidas, para no pisar las que tenemos
-        	Habilidad comprobacionHabilidadIzq = buscarHabilidad(habilidadIzq.getNombre());
-        	Habilidad comprobacionHabilidadDer = buscarHabilidad(habilidadDer.getNombre());
-        	if(comprobacionHabilidadDer == null && comprobacionHabilidadIzq == null) {
-        		//al ser null ambos significa que no se encuentran en el arbol por lo tanto procedemos a intentar meterlos
-        		if(habilidadIzq != null && habilidadDer != null)
-            	{
-            		agregarHabilidad(habilidad, habilidadIzq, habilidadDer);
-    	        	System.out.println("Se ha desbloqueado la habilidad " + habilidad.toString() + " y tienes las nuevas habilidades de :");
-    	        	System.out.println(habilidadIzq.toString());
-    	        	System.out.println(habilidadDer.toString());
-    	        	System.out.println();
+        	if(habilidadIzq != null && habilidadDer != null)
+        	{
+        		Habilidad comprobacionHabilidadIzq = buscarHabilidad(habilidadIzq.getNombre());
+	        	Habilidad comprobacionHabilidadDer = buscarHabilidad(habilidadDer.getNombre());
+	        	if(comprobacionHabilidadDer == null && comprobacionHabilidadIzq == null) {
+	        		//al ser null ambos significa que no se encuentran en el arbol por lo tanto procedemos a intentar meterlos
+	        		
+	            		agregarHabilidad(habilidad, habilidadIzq, habilidadDer);
+	    	        	System.out.println("Se ha desbloqueado la habilidad " + habilidad.toString() + " y tienes las nuevas habilidades de :");
+	    	        	System.out.println(habilidadIzq.toString());
+	    	        	System.out.println(habilidadDer.toString());
+	    	        	System.out.println();
             	}
         	}
         	

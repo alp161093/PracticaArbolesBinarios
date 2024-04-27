@@ -170,7 +170,7 @@ public class ArbolHabilidadesDinamico {
     	String texto = "Se va a comprobar esta habilidad -> " + habilidad.getNombre();
     	if(habilidad.getNombre().equals(nombre))
     	{
-    		System.out.println(texto + " , ENCOTRADO");
+    		System.out.println(texto + " , ENCONTRADO");
     		return habilidad;
     	}
     	else {
